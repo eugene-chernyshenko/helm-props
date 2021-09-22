@@ -13,15 +13,15 @@
 {{ $prefix | indent 4 }}={{ $value }}
 {{ end -}}
 {{- end -}}
-
+---
 apiVersion: apps/v1
 kind: ConfigMap
 metadata:
-  name: {{ include "helm-props.fullname" . }}
+  name: {{ include "helm-props.fullname" . }}-configs
   labels:
     {{- include "helm-props.labels" . | nindent 4 }}
 data:
 {{- range $k, $v := .Values.configs }}
-  {{ $k }}: |
-{{ template "envify" (list "" $v)  }}
+{{ $k | indent 2 }}: |
+{{ template "envify" (list "" $v) }}
 {{- end }}
