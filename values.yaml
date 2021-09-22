@@ -1,4 +1,4 @@
-appConfigs:
+configs:
   test.properties:
     some:
       foo: 1

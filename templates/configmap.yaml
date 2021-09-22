@@ -21,7 +21,7 @@ metadata:
   labels:
     {{- include "helm-props.labels" . | nindent 4 }}
 data:
-{{- range $k, $v := .Values.appConfigs }}
+{{- range $k, $v := .Values.configs }}
   {{ $k }}: |
 {{ template "envify" (list "" $v)  }}
 {{- end }}
