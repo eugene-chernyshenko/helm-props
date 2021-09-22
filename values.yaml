@@ -1,0 +1,15 @@
+appConfigs:
+  test.properties:
+    some:
+      foo: 1
+      bar: 2
+
+  database.properties:
+    spring:
+      datasource:
+        driver-class-name: "com.mysql.jdbc.Driver"
+        url: "jdbc:mysql://localhost/test"
+
+  server.properties:
+    server:
+      port: 9000
