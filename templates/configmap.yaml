@@ -22,7 +22,15 @@ metadata:
   labels:
     {{- include "helm-props.labels" . | nindent 4 }}
 data:
-{{- range $k, $v := .Values.configs }}
+{{- range $k, $v := .Values.configuration }}
+{{ $k | indent 2 }}: |
+{{ tpl (toYaml $v) $ | indent 4 }}
+{{- end }}
+{{- range $k, $v := .Values.configurationProperties }}
 {{ $k | indent 2 }}: |
 {{ template "envify" (list "" $v $) }}
+{{- end }}
+{{- range $k, $v := .Values.configurationRaw }}
+{{ $k | indent 2 }}: |
+{{ tpl $v $ | indent 4 }}
 {{- end }}

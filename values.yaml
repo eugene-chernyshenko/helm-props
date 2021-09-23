@@ -1,14 +1,44 @@
-configs:
+configuration:
+  application.yaml:
+    spring:
+      datasource:
+        driver-class-name: "com.mysql.jdbc.Driver"
+        url: "jdbc:mysql://localhost/test"
+        username: "{{ .Values.vars.database.username }}"
+        password: "{{ .Values.vars.database.password }}"
+    some:
+      foo: 1
+      bar: 2
+    server:
+      port: 9000
+
+configurationProperties:
   database.properties:
     spring:
       datasource:
         driver-class-name: "com.mysql.jdbc.Driver"
         url: "jdbc:mysql://localhost/test"
-        password: "{{ .Values.database.password }}"
+        username: "{{ .Values.vars.database.username }}"
+        password: "{{ .Values.vars.database.password }}"
+    some:
+      foo: 1
+      bar: 2
 
   server.properties:
     server:
       port: 9000
 
-database:
-  password: "qwerty"
+configurationRaw:
+  default.conf: |
+    server {
+      listen 80;
+      location /api {
+        proxy_pass {{ .Values.vars.backend }};
+      }
+    }
+
+vars:
+  backend: "http://127.0.0.1:8080"
+  database:
+    username: "dbuser"
+    password: "secret"
