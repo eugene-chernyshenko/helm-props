@@ -1,0 +1,12 @@
+vars:
+  backend: "http://backend-service:8080"
+
+configuration:
+  application.yaml:
+    server:
+      port: 8080
+
+configurationProperties:
+  server.properties:
+    server:
+      port: 8080
