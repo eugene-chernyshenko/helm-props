@@ -1,17 +1,16 @@
 {{- define "envify" -}}
 {{- $prefix := index . 0 -}}
 {{- $value := index . 1 -}}
-{{- $root := index . 2 -}}
 {{- if kindIs "map" $value -}}
   {{- range $k, $v := $value -}}
     {{- if $prefix -}}
-        {{- template "envify" (list (printf "%s.%s" $prefix $k) $v $root) -}}
+        {{- template "envify" (list (printf "%s.%s" $prefix $k) $v) -}}
     {{- else -}}
-        {{- template "envify" (list (printf "%s" $k) $v $root) -}}
+        {{- template "envify" (list (printf "%s" $k) $v) -}}
     {{- end -}}
   {{- end -}}
 {{- else -}}
-{{ $prefix | indent 4 }}={{ tpl (toString $value) $root }}
+{{ $prefix | indent 4 }}={{ $value }}
 {{ end -}}
 {{- end -}}
 ---
@@ -24,5 +23,5 @@ metadata:
 data:
 {{- range $k, $v := .Values.configs }}
 {{ $k | indent 2 }}: |
-{{ template "envify" (list "" $v $) }}
+{{ template "envify" (list "" $v) }}
 {{- end }}
