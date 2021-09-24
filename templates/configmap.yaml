@@ -11,7 +11,11 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
+{{ if contains "{{" (toString $value) -}}
 {{ $prefix | indent 4 }}={{ tpl (toString $value) $root }}
+{{ else -}}
+{{ $prefix | indent 4 }}={{ $value }}
+{{ end -}}
 {{ end -}}
 {{- end -}}
 ---
