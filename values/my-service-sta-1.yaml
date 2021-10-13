@@ -1,5 +1,7 @@
 vars:
   backend: "http://backend-service:8080"
+  database:
+    host: 10.10.10.10
 
 configuration:
   application.yaml:

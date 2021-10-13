@@ -3,7 +3,7 @@ configuration:
     spring:
       datasource:
         driver-class-name: "com.mysql.jdbc.Driver"
-        url: "jdbc:mysql://localhost/test"
+        url: "jdbc:mysql://{{ .Values.vars.database.host }}/{{ .Values.vars.database.name }}"
         username: "{{ .Values.vars.database.username }}"
         password: "{{ .Values.vars.database.password }}"
     some:
@@ -17,7 +17,7 @@ configurationProperties:
     spring:
       datasource:
         driver-class-name: "com.mysql.jdbc.Driver"
-        url: "jdbc:mysql://localhost/test"
+        url: "jdbc:mysql://{{ .Values.vars.database.host }}/{{ .Values.vars.database.name }}"
         username: "{{ .Values.vars.database.username }}"
         password: "{{ .Values.vars.database.password }}"
     some:
@@ -40,5 +40,7 @@ configurationRaw:
 vars:
   backend: "http://127.0.0.1:8080"
   database:
-    username: "dbuser"
-    password: "secret"
+    host: localhost
+    name: test
+    username: dbuser
+    password: secret
